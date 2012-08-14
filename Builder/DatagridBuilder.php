@@ -119,15 +119,12 @@ class DatagridBuilder implements DatagridBuilderInterface
      */
     public function getBaseDatagrid(AdminInterface $admin, array $values = array())
     {
-        $queryBuilder = $admin->createQuery();
-
-        $query = new ProxyQuery($queryBuilder);
         $pager = new Pager;
         $pager->setCountColumn($admin->getModelManager()->getIdentifierFieldNames($admin->getClass()));
 
         $formBuilder = $this->formFactory->createNamedBuilder('filter', 'form', array(), array('csrf_protection' => false));
 
-        return new Datagrid($query, $admin->getList(), $pager, $formBuilder, $values);
+        return new Datagrid($admin->createQuery(), $admin->getList(), $pager, $formBuilder, $values);
     }
 
 }

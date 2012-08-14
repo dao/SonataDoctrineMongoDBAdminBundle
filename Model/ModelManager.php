@@ -215,7 +215,7 @@ class ModelManager implements ModelManagerInterface
     {
         $repository = $this->getEntityManager()->getRepository($class);
 
-        return $repository->createQueryBuilder($alias);
+        return new ProxyQuery($repository->createQueryBuilder($alias));
     }
 
     /**
