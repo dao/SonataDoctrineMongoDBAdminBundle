@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Query\Builder;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -215,7 +216,7 @@ class ModelManager implements ModelManagerInterface
     {
         $repository = $this->getEntityManager()->getRepository($class);
 
-        return $repository->createQueryBuilder($alias);
+        return new ProxyQuery($repository->createQueryBuilder($alias));
     }
 
     /**
